@@ -19,7 +19,7 @@ const page = () => {
               id="name"
               name="name"
               required
-              className='w-full p-3 rounded-lg bg-input'
+              className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-foreground shadow-lg focus:outline-none focus:ring-0'
               placeholder="full name"
             />
             <input
@@ -27,7 +27,7 @@ const page = () => {
               id="email"
               name="email"
               required
-              className='w-full p-3 rounded-lg bg-input'
+              className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-foreground shadow-lg focus:outline-none focus:ring-0'
               placeholder="your@email.com"
             />
             <input
@@ -35,12 +35,12 @@ const page = () => {
               id="password"
               name="password"
               required
-              className='w-full p-3 rounded-lg bg-input'
+              className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-foreground shadow-lg focus:outline-none focus:ring-0'
               placeholder="Password"
             />
             <button
               type="submit"
-              className='w-full bg-accent text-white p-3 rounded-lg font-medium hover:bg-primary transition-colors'
+              className='bg-accent/80 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-primary-text flex gap-2 items-center justify-center shadow-lg'
             >
               Create account
             </button>
@@ -54,7 +54,7 @@ const page = () => {
             </div>
             <button
               type="button"
-              className='w-full bg-input text-secondary-foreground p-3 rounded-lg hover:bg-card transition-colors'
+              className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium flex justify-center gap-2 items-center shadow-lg'
             >
               Sign up with Apple
             </button>
