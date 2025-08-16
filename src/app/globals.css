@@ -226,3 +226,9 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Hero Image Carousel Hardware Acceleration Optimizations */
+.hero-images-container {
+  will-change: transform;
+  transform: translate3d(0, 0, 0); /* Enable hardware acceleration */
+}

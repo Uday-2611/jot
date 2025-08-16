@@ -6,18 +6,11 @@ const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
 export default function NotePage({ params }) {
   const { noteId } = React.use(params)
-  
+
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-3xl mx-auto space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold">Note {noteId}</h1>
-        </div>
-        <input
-          type="text"
-          placeholder="Note title"
-          className="w-full bg-input/40 backdrop-blur-sm px-4 py-3 rounded-xl text-lg focus:outline-none focus:ring-0"
-        />
+    <div className="min-h-screen p-10">
+      <div className="w-full mx-auto space-y-6">
+        <input type="text" placeholder="Note title..." className="w-full py-3 rounded-xl text-5xl focus:outline-none focus:ring-0 mt-20 text-white" />
         <Editor />
       </div>
     </div>

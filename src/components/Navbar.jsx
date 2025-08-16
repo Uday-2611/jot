@@ -1,18 +1,24 @@
 'use client'
 
-import { Sparkle } from 'lucide-react'
+import { Ellipsis } from 'lucide-react'
 import React, { useState, useRef, useEffect } from 'react'
 import ProfileCard from './ProfileCard'
+import ActionCard from './ActionCard'
 
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isActionOpen, setIsActionOpen] = useState(false);
   const profileRef = useRef(null);
+  const actionRef = useRef(null);
 
   // Close profile dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setIsProfileOpen(false);
+      }
+      if (actionRef.current && !actionRef.current.contains(event.target)) {
+        setIsActionOpen(false);
       }
     };
 
@@ -24,23 +30,27 @@ const Navbar = () => {
     setIsProfileOpen(!isProfileOpen);
   };
 
-  return (
-    <div className='fixed w-full h-20 flex justify-between items-center p-4 bg-transparent'>
-        <div className='flex gap-12 items-center'>
-            <h1 className='font-mono font-medium text-2xl'>Zenith Works</h1>
-            <button className='bg-accent px-6 py-2 rounded-xl text-lg font-medium text-primary-text flex gap-2 items-center'> <Sparkle className='size-5' /> Ask AI</button>
-        </div>
+  const toggleAction = () => {
+    setIsActionOpen(!isActionOpen);
+  };
 
-        <div className='relative' ref={profileRef}>
-            <button 
-                onClick={toggleProfile}
-                className='bg-primary rounded-full size-10 hover:scale-105 transition-transform cursor-pointer flex items-center justify-center'
-            >
-                <span className='text-primary-foreground font-semibold text-lg'></span>
-            </button>
-            
-            <ProfileCard isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+  return (
+    <div className='fixed w-full h-20 flex justify-between items-center p-4 bg-transparent z-100'>
+      <div className='flex gap-12 items-end'>
+        <h1 className='font-mono font-medium text-2xl'>Zenith Works</h1>
+        <div className='relative' ref={actionRef}>
+          <button onClick={toggleAction} className='hover:bg-accent px-2 py-1 rounded-lg'> <Ellipsis className='size-5' /> </button>
+          <ActionCard isOpen={isActionOpen} onClose={() => setIsActionOpen(false)} />
         </div>
+      </div>
+
+      <div className='relative' ref={profileRef}>
+        <button onClick={toggleProfile} className='bg-primary hover:bg-primary/90 rounded-full size-10 hover:scale-105 transition-all cursor-pointer flex items-center justify-center border-2 border-primary-foreground/20'>
+          <span className='text-primary-foreground font-semibold text-lg'>U</span>
+        </button>
+
+        <ProfileCard isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+      </div>
     </div>
   )
 }
