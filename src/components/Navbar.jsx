@@ -4,6 +4,7 @@ import { Ellipsis } from 'lucide-react'
 import React, { useState, useRef, useEffect } from 'react'
 import ProfileCard from './ProfileCard'
 import ActionCard from './ActionCard'
+import logoImage from '@/public/images/logo_image.png'
 
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -11,7 +12,6 @@ const Navbar = () => {
   const profileRef = useRef(null);
   const actionRef = useRef(null);
 
-  // Close profile dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -35,11 +35,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className='fixed w-full h-20 flex justify-between items-center p-4 bg-transparent z-100'>
-      <div className='flex gap-12 items-end'>
-        <h1 className='font-mono font-medium text-2xl'>Zenith Works</h1>
+    <div className='fixed w-full h-20 flex justify-between items-center p-6 bg-transparent z-50'>
+      <div className='flex items-center gap-8'>
+        <img src={logoImage.src} alt="Zenith Books Logo" className="h-16 w-auto" />
         <div className='relative' ref={actionRef}>
-          <button onClick={toggleAction} className='hover:bg-accent px-2 py-1 rounded-lg'> <Ellipsis className='size-5' /> </button>
+          <button onClick={toggleAction} className='hover:bg-accent/20 px-3 py-2 rounded-lg transition-colors'> 
+            <Ellipsis className='size-5' /> 
+          </button>
           <ActionCard isOpen={isActionOpen} onClose={() => setIsActionOpen(false)} />
         </div>
       </div>

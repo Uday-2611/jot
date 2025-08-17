@@ -1,5 +1,6 @@
 import React from 'react'
 import authImage from '@/public/images/auth.jpg'
+import logoImage from '@/public/images/logo_image.png'
 
 const page = () => {
   return (
@@ -10,7 +11,7 @@ const page = () => {
       </div>
       <div className='h-full w-[55%] text-foreground flex justify-center items-center'>
         <div className='w-[45%] max-w-md text-center flex flex-col gap-1'>
-          <h1 className='text-4xl font-semibold'>Zenith Works</h1>
+        <img src={logoImage.src} alt="Zenith Books Logo" className="w-32 h-auto mx-auto mb-6" />
           <p className='text-neutral-400'>Welcome</p>
           <p className='text-neutral-400'>Enter your details below to start</p>
           <form action="" className='space-y-3 mt-10'>

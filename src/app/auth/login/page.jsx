@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import authImage from '@/public/images/auth.jpg'
+import logoImage from '@/public/images/logo_image.png'
 import { useRouter } from 'next/navigation'
 
 const page = () => {
@@ -19,7 +20,7 @@ const page = () => {
       </div>
       <div className='h-full w-[55%] text-foreground flex justify-center items-center'>
         <div className='w-[45%] max-w-md text-center flex flex-col gap-1'>
-          <h1 className='text-4xl font-semibold'>Zenith Works</h1>
+          <img src={logoImage.src} alt="Zenith Books Logo" className="w-32 h-auto mx-auto mb-6" />
           <p className='text-neutral-400'>Welcome back</p>
           <p className='text-neutral-400'>Enter your details below to start</p>
           <form onSubmit={handleSubmit} className='space-y-3 mt-10'>
@@ -31,13 +32,7 @@ const page = () => {
               className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-foreground shadow-lg focus:outline-none focus:ring-0'
               placeholder='your@email.com'
             />
-            <input
-              type='password'
-              id='password'
-              name='password'
-              required
-              className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-foreground shadow-lg focus:outline-none focus:ring-0'
-              placeholder='Password'
+            <input type='password' id='password' name='password' required className='bg-input/40 backdrop-blur-sm px-6 py-3 w-full rounded-xl text-lg font-medium text-foreground shadow-lg focus:outline-none focus:ring-0' placeholder='Password'
             />
             <button
               type='submit'

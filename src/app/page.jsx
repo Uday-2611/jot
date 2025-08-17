@@ -8,25 +8,41 @@ import f2Image from '@/public/images/f2.jpg'
 import f3Image from '@/public/images/f3.jpg'
 import f4Image from '@/public/images/f4.jpg'
 import f6Image from '@/public/images/f6.jpg'
+import logoImage from '@/public/images/logo_image.png'
 
 const page = () => {
-  const rootRef = useRef(null)
   const heroImagesRef = useRef(null)
+  const headlineRef = useRef(null)
 
   const headline =
-    'A seamless canvas for every thought.\nWhere your ideas find form and\norganization is effortless.'
-  const brand = 'Zenith Works'
+    'A seamless canvas for every thought. Where your ideas find form and organization is effortless.'
   const ctaText = 'Get started'
 
   useEffect(() => {
+    // Headline animation on load
+    if (headlineRef.current) {
+      const words = headlineRef.current.querySelectorAll('.headline-word')
+      
+      // Set initial position (above their final position)
+      gsap.set(words, { y: -50, opacity: 0 })
+      
+      // Animate words to their final position with stagger
+      gsap.to(words, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      })
+    }
+
+    // Carousel animation
     if (heroImagesRef.current) {
       // Get the total width of all images to calculate the loop distance
       const container = heroImagesRef.current
       const totalWidth = container.scrollWidth
-      const visibleWidth = container.clientWidth
-      
+
       // Calculate how far to move to create seamless loop
-      // We move by the width of the first set of images
       const loopDistance = totalWidth / 2
 
       // Create GSAP timeline for infinite horizontal carousel
@@ -50,18 +66,18 @@ const page = () => {
   }, [])
 
   return (
-    <div ref={rootRef} className='w-screen h-screen flex flex-col justify-between'>
-      <div className='w-full flex justify-between p-6 items-center font-mono'>
-        <h1 className='font-semibold text-3xl leading-tight'>
-          {brand.split('').map((ch, idx) => (
-            <span key={idx} className='brand-letter inline-block'>
-              {ch === ' ' ? '\u00A0' : ch}
-            </span>
-          ))}
-        </h1>
+    <div className='w-screen h-screen flex flex-col justify-between'>
+      {/* Header Section */}
+      <div className='w-full flex justify-between items-center px-8 py-6'>
+        <img
+          src={logoImage.src}
+          alt="Zenith Books Logo"
+          className="h-16 w-auto"
+        />
+
         <Link
           href='/auth/login'
-          className='cta-btn bg-foreground rounded-md h-11 px-5 flex items-center gap-2 text-background hover:bg-foreground/90 transition-colors'
+          className='cta-btn bg-foreground rounded-md h-11 px-6 flex items-center gap-2 text-background hover:bg-foreground/90 transition-colors'
         >
           <MoveUpRight className='text-background' />
           <span aria-label={ctaText}>
@@ -74,28 +90,30 @@ const page = () => {
         </Link>
       </div>
 
-      <div className='flex-col h-[70%] p-6 gap-6 flex'>
-        <h3 className='font-medium text-5xl md:text-6xl leading-tight md:leading-[1.15] whitespace-pre-wrap'>
-          {headline.split('').map((ch, idx) =>
-            ch === '\\n' ? (
-              <br key={`br-${idx}`} />
-            ) : (
-              <span key={idx} className='headline-letter inline-block'>
-                {ch}
-              </span>
-            )
-          )}
+      {/* Main Content Section */}
+      <div className='flex flex-col h-[70%] px-8 pb-8 gap-8'>
+        <h3 ref={headlineRef} className='font-medium text-5xl md:text-6xl leading-tight md:leading-[1.15]'>
+          {headline.split(' ').map((word, idx) => (
+            <span key={idx} className='headline-word inline-block mr-4'>
+              {word}
+            </span>
+          ))}
         </h3>
 
-        <div className='overflow-hidden w-full h-full'>
-          <div ref={heroImagesRef} className='hero-images-container flex gap-1 h-full' style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}>
+        {/* Image Carousel Container */}
+        <div className='overflow-hidden w-full h-full rounded-md'>
+          <div
+            ref={heroImagesRef}
+            className='hero-images-container flex gap-2 h-full'
+            style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
+          >
             {/* First set of images */}
             <div className='hero-img w-[20%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f1Image.src})` }}></div>
             <div className='hero-img w-[20%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f2Image.src})` }}></div>
             <div className='hero-img w-[15%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f3Image.src})` }}></div>
             <div className='hero-img w-[25%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f4Image.src})` }}></div>
             <div className='hero-img w-[25%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f6Image.src})` }}></div>
-            
+
             {/* Duplicate set for seamless loop */}
             <div className='hero-img w-[20%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f1Image.src})` }}></div>
             <div className='hero-img w-[20%] h-full rounded-md bg-cover bg-center bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${f2Image.src})` }}></div>
